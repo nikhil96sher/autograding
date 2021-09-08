@@ -10,13 +10,13 @@ const run = async (): Promise<void> => {
       throw new Error('No GITHUB_WORKSPACE')
     }
 
-    const assignmentPath = core.getInput("path")
+    const assignmentPath = core.getInput('path')
     if (assignmentPath) {
       console.log(`Using assignment path: ${assignmentPath}`)
       cwd = path.join(cwd, assignmentPath)
     }
 
-    let testCasePath = core.getInput("test")
+    let testCasePath = core.getInput('test')
     if (!testCasePath) {
       testCasePath = 'autograding.json'
     }
