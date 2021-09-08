@@ -16,7 +16,12 @@ const run = async (): Promise<void> => {
       cwd = path.join(cwd, assignmentPath)
     }
 
-    const data = fs.readFileSync(path.resolve(cwd, '.github/classroom/autograding.json'))
+    let testCasePath = core.getInput("test")
+    if (!testCasePath) {
+      testCasePath = 'autograding.json'
+    }
+
+    const data = fs.readFileSync(path.resolve(cwd, '.github/classroom/${testCasePath}'))
     const json = JSON.parse(data.toString())
 
     await runAll(json.tests as Array<Test>, cwd)
